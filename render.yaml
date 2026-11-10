@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: smart-queue-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    region: oregon
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        sync: false # Set in Render Dashboard with Supabase connection string
+      - key: CORS_ORIGINS
+        sync: false # Set in Render Dashboard with Vercel frontend URL
+      - key: FRONTEND_URL
+        sync: false # Set in Render Dashboard with Vercel frontend URL
+

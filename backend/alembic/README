@@ -1,0 +1,9 @@
+Generic single-database configuration with an async/sync dbapi.
+Managed by Alembic for Supabase PostgreSQL schema migrations.
+
+Commands:
+- Generate migration: alembic revision --autogenerate -m "description"
+- Apply migrations: alembic upgrade head
+- Rollback migration: alembic downgrade -1
+- Current status: alembic current
+
