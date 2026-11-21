@@ -53,6 +53,14 @@ def get_session_factory():
     return _SessionLocal
 
 
+def SessionLocal() -> Session:
+    """Convenience helper returning a database session from the initialized factory."""
+    factory = get_session_factory()
+    if factory is None:
+        raise RuntimeError("Database connection is not configured.")
+    return factory()
+
+
 def get_db() -> Generator[Session, None, None]:
     """
     FastAPI dependency that provides a database session per request

@@ -1,7 +1,10 @@
 import React from 'react';
-import { Activity, ShieldCheck } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Activity, UserPlus, Home } from 'lucide-react';
 
 const Navbar = ({ overallStatus }) => {
+  const location = useLocation();
+
   const getBadgeStyle = () => {
     switch (overallStatus) {
       case 'connected':
@@ -31,8 +34,8 @@ const Navbar = ({ overallStatus }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Title */}
-          <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-lg bg-teal-600 flex items-center justify-center text-white shadow-sm shadow-teal-500/20">
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="h-10 w-10 rounded-lg bg-teal-600 flex items-center justify-center text-white shadow-sm shadow-teal-500/20 group-hover:bg-teal-700 transition-colors">
               <Activity className="h-6 w-6" />
             </div>
             <div>
@@ -43,16 +46,43 @@ const Navbar = ({ overallStatus }) => {
                 Public Hospital Smart Queuing
               </span>
             </div>
-          </div>
+          </Link>
 
-          {/* Status Badge & Milestone indicator */}
-          <div className="flex items-center space-x-4">
-            <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-              Checkpoint 1: Foundation
+          {/* Navigation Links & Status Badge */}
+          <div className="flex items-center space-x-3 sm:space-x-5">
+            <nav className="flex items-center space-x-1 sm:space-x-2">
+              <Link
+                to="/"
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center space-x-1.5 ${
+                  location.pathname === '/'
+                    ? 'bg-teal-50 text-teal-800'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                }`}
+              >
+                <Home className="h-3.5 w-3.5" />
+                <span>Overview</span>
+              </Link>
+
+              <Link
+                to="/register"
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center space-x-1.5 ${
+                  location.pathname === '/register'
+                    ? 'bg-teal-600 text-white shadow-sm'
+                    : 'bg-teal-50 text-teal-700 hover:bg-teal-100'
+                }`}
+              >
+                <UserPlus className="h-3.5 w-3.5" />
+                <span>Register Patient</span>
+              </Link>
+            </nav>
+
+            <span className="hidden md:inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+              Checkpoint 2: Core Queuing
             </span>
+
             <div className={`flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${getBadgeStyle()}`}>
               <span className={`h-2 w-2 rounded-full ${overallStatus === 'connected' ? 'bg-emerald-500 animate-pulse' : overallStatus === 'database_unavailable' ? 'bg-amber-500 animate-pulse' : 'bg-rose-500'}`} />
-              <span>{getBadgeText()}</span>
+              <span className="hidden sm:inline">{getBadgeText()}</span>
             </div>
           </div>
         </div>
@@ -62,4 +92,3 @@ const Navbar = ({ overallStatus }) => {
 };
 
 export default Navbar;
-

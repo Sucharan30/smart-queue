@@ -49,6 +49,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Database & Test files
+*.db
+*.sqlite
+*.sqlite3
+
 # Editor & IDE files
 .idea/
 .vscode/

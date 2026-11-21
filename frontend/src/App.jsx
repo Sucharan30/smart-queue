@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import LandingPage from './pages/LandingPage';
+import RegistrationPage from './pages/RegistrationPage';
 import { checkHealth } from './services/api';
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
               />
             }
           />
+          <Route path="/register" element={<RegistrationPage />} />
         </Routes>
       </MainLayout>
     </Router>
@@ -60,4 +62,3 @@ function App() {
 }
 
 export default App;
-
